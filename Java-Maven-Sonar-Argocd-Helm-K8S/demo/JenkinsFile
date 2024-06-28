@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // Consider adding a container status check here (optional)
+        sh 'echo passed'
       }
     }
     stage('Build and Test') {
