@@ -13,9 +13,9 @@ pipeline {
     }
     stage('Build and Test') {
       steps {
+        sh 'ls -ltr'
         sh '''
           cd Java-Maven-Sonar-Argocd-Helm-K8S/demo
-          ls -ltr
           mvn clean package
         '''
       }
@@ -59,11 +59,10 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
           sh '''
-            git config user.email "sudhanshuku620026@gmail.com"
-            git config user.name "sudhanshuku kumar"
-            cd Java-Maven-Sonar-Argocd-Helm-K8S/demo-manifests
-            sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment.yml
-            git add deployment.yml
+            git config user.email "sudhanshu620026@gmail.com"
+            git config user.name "sudhanshu kumar"
+            sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Java-Maven-Sonar-Argocd-Helm-K8S/demo-manifests/deployment.yml
+            git add Java-Maven-Sonar-Argocd-Helm-K8S/demo-manifests/deployment.yml
             git commit -m "Update deployment image to version ${BUILD_NUMBER}"
             git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
           '''
