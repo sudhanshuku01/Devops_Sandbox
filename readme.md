@@ -49,5 +49,3 @@ Contributions are welcome! Feel free to open issues or submit pull requests to e
 This project is licensed under the MIT License.
 
 ---
-
-You can copy this text into the README.md file in your repository.
